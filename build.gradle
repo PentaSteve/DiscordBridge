@@ -22,7 +22,7 @@ dependencies {
 	// You may need to force-disable transitiveness on them.
 
 	//JavaCord, library for discord bot
-	implementation 'org.javacord:javacord:3.1.1'
+	compile 'org.javacord:javacord:3.1.1'
 	//log4j
 	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.3'
 	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
@@ -54,6 +54,7 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 jar {
 	from "LICENSE"
 }
+
 
 // configure the maven publication
 publishing {
