@@ -4,9 +4,11 @@ import com.oroarmor.util.config.Config;
 import com.oroarmor.util.config.ConfigItem;
 import com.oroarmor.util.config.ConfigItemGroup;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.GameMessageS2CPacket;
+import net.minecraft.server.MinecraftServer;
 import org.javacord.api.entity.channel.ServerTextChannel;
 import org.javacord.api.entity.server.Server;
 
@@ -24,6 +26,7 @@ public class DiscordIntegration implements ModInitializer {
 	private String channelName;
 	private String guildName;
 	private Server server;
+	//MinecraftServer Server;
 	public static ServerTextChannel chatBridge;
 	public static Bot bot;
 
@@ -72,12 +75,14 @@ public class DiscordIntegration implements ModInitializer {
 		System.out.println(this.serverid);
 		System.out.println(this.multiservermode);
 		*/
-		// initialize discord bot
+		// initialize discord bot after server initialization
+		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+			bot = new Bot(this.token,server);
+			for(Iterator i = bot.getApi().getServerTextChannelsByNameIgnoreCase(this.channelName).iterator(); i.hasNext();) {
+				chatBridge = (ServerTextChannel) i.next();
+			}
+		});
 
-		bot = new Bot(this.token);
-		for(Iterator i = bot.getApi().getServerTextChannelsByNameIgnoreCase(this.channelName).iterator(); i.hasNext();) {
-			chatBridge = (ServerTextChannel) i.next();
-		}
 	}
 	
 }
