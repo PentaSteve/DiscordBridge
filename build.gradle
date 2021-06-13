@@ -9,6 +9,13 @@ targetCompatibility = JavaVersion.VERSION_1_8
 archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
+repositories{
+	mavenCentral()
+	maven {
+		name 'm2-dv8tion'
+		url 'https://m2.dv8tion.net/releases'
+	}
+}
 
 dependencies {
 	//to change the versions see the gradle.properties file
@@ -21,8 +28,7 @@ dependencies {
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
 
-	//JavaCord, library for discord bot
-	compile 'org.javacord:javacord:3.1.1'
+	compile "net.dv8tion:JDA:4.3.0_277"
 	//log4j
 	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.3'
 	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
@@ -74,5 +80,9 @@ publishing {
 	repositories {
 		mavenCentral()
 		jcenter()
+		maven {
+			name 'm2-dv8tion'
+			url 'https://m2.dv8tion.net/releases'
+		}
 	}
 }

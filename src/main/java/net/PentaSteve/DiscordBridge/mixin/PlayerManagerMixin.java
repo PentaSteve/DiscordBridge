@@ -1,8 +1,7 @@
-package net.PentaSteve.DiscordIntegration.mixin;
+package net.PentaSteve.DiscordBridge.mixin;
 
 
-import com.google.common.collect.Maps;
-import net.PentaSteve.DiscordIntegration.chatMessageHandler;
+import net.PentaSteve.DiscordBridge.chatMessageHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.advancement.PlayerAdvancementTracker;
@@ -14,9 +13,6 @@ import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.ServerStatHandler;
 import net.minecraft.text.Text;
-import net.minecraft.util.registry.DynamicRegistryManager;
-import org.apache.logging.log4j.Logger;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -45,7 +41,7 @@ public abstract class PlayerManagerMixin {
     @Inject(method = "broadcastChatMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/MessageType;Ljava/util/UUID;)V", at = @At("HEAD"), cancellable = true)
     public void broadcastChatMessage(Text message, MessageType type, UUID senderUuid, CallbackInfo ci) {
         this.server.sendSystemMessage(message, senderUuid);
-        chatMessageHandler.sendchatmessage(message.getString()); // added for discord integration
+        chatMessageHandler.sendchatmessage(message.getString()); // added for chat bridge
         this.sendToAll(new GameMessageS2CPacket(message, type, senderUuid));
         ci.cancel();
     }
