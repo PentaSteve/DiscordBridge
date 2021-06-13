@@ -3,7 +3,7 @@
   "id": "modid",
   "version": "${version}",
 
-  "name": "Discord Integration",
+  "name": "Discord Chat Bridge",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
     "Me!"
@@ -19,7 +19,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.PentaSteve.DiscordIntegration.DiscordIntegration"
+      "net.PentaSteve.DiscordBridge.ChatBridge"
     ]
   },
   "mixins": [
