@@ -1,4 +1,4 @@
-# Discord Integration
+# Discord Bridge
 
 ## Setup
 
