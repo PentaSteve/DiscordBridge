@@ -23,7 +23,7 @@ public class ChatBridge implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		//  Initialize configs
-		File configFile = new File(String.valueOf(FabricLoader.getInstance().getConfigDir()) + "/DiscordIntegration.json");
+		File configFile = new File(String.valueOf(FabricLoader.getInstance().getConfigDir()) + "/DiscordBridge.json");
 		List<ConfigItem<?>> configs = new ArrayList<>();
 		configs.add(new ConfigItem<>("Discord_bot_token", "Put discord bot token here", "bot token"));
 		configs.add(new ConfigItem<>("Server_ID", "SMP", "The minecraft server's unique name"));
